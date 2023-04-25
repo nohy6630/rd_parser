@@ -8,7 +8,6 @@ class Lexeme {
 public class RDparser {
     private static int charClass;
     private static int nextToken;
-    private static int lexLen;
     private static char nextChar;
     static String lexeme;
 
