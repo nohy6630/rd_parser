@@ -146,7 +146,7 @@ def inputExpr():
     getChar()
     while True:
         lex()
-        lexemes.append(Lexeme(nextToken,lexeme))
+        lexemes.append(Lexeme(nextToken, lexeme))
         if nextToken == EOF or nextToken == UNKNOWN_OP:
             break
 
@@ -185,7 +185,7 @@ def getNonBlank():
 
 def lex():
     global nextToken, lexeme, charClass, nextChar
-    lexeme = "";
+    lexeme = ""
     getNonBlank()
     if charClass == DIGIT:
         addChar()
@@ -212,6 +212,7 @@ def lex():
     elif charClass == EOF:
         lexeme = 'EOF'
         nextToken = EOF
+
 
 def lookup():
     if lexeme == "+":
@@ -241,13 +242,14 @@ def lookup():
     else:
         return UNKNOWN_OP
 
+
 while True:
     inputExpr()
     if lexemes[0].type == EOF:
         break
     try:
         res = expr()
-        if(lexemes[idx].type!=EOF)
+        if lexemes[idx].type != EOF:
             raise Exception("syntax error!!")
         print(">>", res)
     except Exception as e:
