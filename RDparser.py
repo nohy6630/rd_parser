@@ -247,6 +247,8 @@ while True:
         break
     try:
         res = expr()
-        print(">>", res);
+        if(lexemes[idx].type!=EOF)
+            raise Exception("syntax error!!")
+        print(">>", res)
     except Exception as e:
         print(">>", e)

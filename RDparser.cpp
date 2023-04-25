@@ -209,6 +209,8 @@ int main()
         try
         {
             string res = expr();
+            if(lexemes[idx].type!=EOF)
+                throw runtime_error("syntax error!!");
             cout << ">> " << res << '\n';
         }
         catch (runtime_error e)

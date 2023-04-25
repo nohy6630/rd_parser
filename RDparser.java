@@ -170,6 +170,8 @@ public class RDparser {
                 break;
             try {
                 String res = expr();
+                if(lexemes[idx].type!=EOF)
+                    throw new RuntimeException("syntax error!!");
                 System.out.println(">> " + res);
             } catch (RuntimeException e) {
                 System.out.println(">> " + e.getMessage());
