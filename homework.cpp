@@ -56,6 +56,8 @@ string expr();
 bool isBinary;
 int idx;
 LEXEME lexemes[1000];
+string inputStr;
+int inputIdx;
 
 int number()
 {
@@ -178,6 +180,9 @@ void input()
 {
     int i = 0;
     cout << ">> ";
+    getline(cin, inputStr);
+    inputStr+='\n';
+    inputIdx=0;
     getChar();
     do
     {
@@ -227,7 +232,7 @@ void addChar()
 
 void getChar()
 {
-    if ((nextChar = getc(stdin)) != '\n')
+    if ((nextChar = inputStr[inputIdx++]) != '\n')
     {
         if (isdigit(nextChar))
             charClass = DIGIT;
