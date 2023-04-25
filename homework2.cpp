@@ -90,9 +90,7 @@ int term()
                 l -= r;
         }
         else
-        {
             break;
-        }
     }
 
     return l;
@@ -111,7 +109,7 @@ int factor()
         }
         else
         {
-            throw runtime_error("Mismatched parentheses");
+            throw runtime_error("syntax error!!");
         }
     }
     return number();
@@ -130,34 +128,48 @@ int dec()
     return input[idx++] - '0';
 }
 
+bool isoperator(char c)
+{
+    return c == '!' || c == '=' || c == '>' || c == '<' || c == '+' || c == '-' || c == '*' || c == '/';
+}
+
+bool isbracket(char c)
+{
+    return c == '(' || c == ')';
+}
+
 string remove_space(string str)
 {
     string ret = "";
     for (int i = 0; i < str.size(); i++)
     {
+        if (!isdigit(str[i]) && !isoperator(str[i]) && !isbracket(str[i]) && !isspace(str[i]))
+            throw runtime_error("syntax error!!");
         if (!isspace(str[i]))
             ret += str[i];
-        //수식에 나올수 없는 문자가 나올경우 예외처리 해줘야할듯
     }
     return ret;
 }
 
 int main()
 {
-    cout << ">> ";
-    getline(cin, input);
-    input = remove_space(input);
-    idx = 0;
-
-    cout << ">> ";
-    try
+    while (1)
     {
-        int result = expr();
-        cout << result << '\n';
-    }
-    catch (runtime_error e)
-    {
-        cout << e.what() << '\n';
+        cout << ">> ";
+        getline(cin, input);
+        if (input.size() == 0)
+            break;
+        idx = 0;
+        try
+        {
+            input = remove_space(input);
+            int result = expr();
+            cout << ">> " << result << '\n';
+        }
+        catch (runtime_error e)
+        {
+            cout << ">> " << e.what() << '\n';
+        }
     }
     return 0;
 }
