@@ -122,7 +122,11 @@ int aexpr()
             if (tmp == MULT_OP)
                 l *= r;
             else
+            {
+                if(r==0)
+                    throw runtime_error("error: divide zero!!");
                 l /= r;
+            }
         }
         else
             break;
